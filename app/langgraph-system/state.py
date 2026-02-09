@@ -1,6 +1,9 @@
-from pydantic import BaseModel
+from operator import add
+from typing import Annotated, Sequence
 
+from langchain_core.messages import BaseMessage
+from pydantic import BaseModel, Field
 
 
 class IncidentCommanderState(BaseModel):
-    alert_id: str
+    messages: Annotated[Sequence[BaseMessage], add] = Field(default_factory=list)

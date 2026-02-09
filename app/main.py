@@ -6,12 +6,17 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import get_settings
 from app.api.routes import health
+from app.core.logging import get_logger
+
+logger = get_logger(__name__)
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    logger.info("Starting lifespan")
     settings = get_settings()
     yield
+    logger.info("Ending lifespan")
 
 
 def create_app() -> FastAPI:
